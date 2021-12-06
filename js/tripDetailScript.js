@@ -177,7 +177,7 @@ function deleteUserReview(id) {
     if (confirm("삭제 하시겠습니까?") === true) {
         $.ajax({
             type: "DELETE",
-            url: `http://localhost:8080/review/delete/${id}`,
+            url: `http://localhost:8080/review/${id}`,
             data: {},
             success: function (response) {
                 window.location.href = "../templates/tripsList.html";
