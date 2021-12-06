@@ -6,7 +6,7 @@ function getId() {
 function getUserReview(reviewId) {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/userReview/${reviewId}`,
+        url: `http://localhost:8080/review/${reviewId}`,
         success: function (response) {
             $('#title').text(response['title']);
             $('#place').text(response['place']);
@@ -37,7 +37,7 @@ function postUserReview(reviewId) {
 
     $.ajax({
         type: "POST",
-        url: `http://localhost:8080/userReview/comment/${reviewId}`,
+        url: `http://localhost:8080/review/comment/${reviewId}`,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({comment: UserReviewComment}),
         statusCode: {
@@ -57,7 +57,7 @@ function showComments() {
     $('#comment_list').empty();
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/userReview/comment/${getId()}`,
+        url: `http://localhost:8080/review/comment/${getId()}`,
         data: {},
         success: function (response) {
             for (let i = 0; i < response.length; i++) {
@@ -106,7 +106,7 @@ function deleteComment(comment_id) {
     if (confirm("삭제하시겠습니까?") === true) {
         $.ajax({
             type: "DELETE",
-            url: `http://localhost:8080/userReview/comment/${comment_id}`,
+            url: `http://localhost:8080/review/comment/${comment_id}`,
             data: {},
             success: function (response) {
                 showComments();
@@ -138,7 +138,7 @@ function updateComment(commentId) {
     console.log(UserReviewComment)
     $.ajax({
         type: "POST",
-        url: `http://localhost:8080/userReview/comment/${getId()}`,
+        url: `http://localhost:8080/review/comment/${getId()}`,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(UserReviewComment),
         statusCode: {
@@ -159,7 +159,7 @@ function updateComment(commentId) {
 function updateUserReview(id) {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/userReview/${id}`,
+        url: `http://localhost:8080/review/${id}`,
         success: function (response) {
             sessionStorage.setItem('title', response['title']);
             sessionStorage.setItem('place', response['place']);
@@ -177,7 +177,7 @@ function deleteUserReview(id) {
     if (confirm("삭제 하시겠습니까?") === true) {
         $.ajax({
             type: "DELETE",
-            url: `http://localhost:8080/userReview/delete/${id}`,
+            url: `http://localhost:8080/review/${id}`,
             data: {},
             success: function (response) {
                 window.location.href = "../templates/tripsList.html";
@@ -199,7 +199,7 @@ function userReviewLike(trip_id) {
 
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/userReview/like",
+                url: "http://localhost:8080/review/like",
                 contentType: "application/json",
                 data: JSON.stringify({
                     user_review_id: trip_id,
@@ -214,7 +214,7 @@ function userReviewLike(trip_id) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/userReview/like",
+                url: "http://localhost:8080/review/like",
                 contentType: "application/json",
                 data: JSON.stringify({
                     user_review_id: trip_id,
@@ -232,7 +232,7 @@ function userReviewLike(trip_id) {
 function get_like(id) {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/userReview/like/${id}`,
+        url: `http://localhost:8080/review/like/${id}`,
         data: {},
         success: function (response) {
             if (response['likeStatus'] == true) {
@@ -249,7 +249,7 @@ function get_like(id) {
 function kakaoShare() {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/userReview/${getId()}`,
+        url: `http://localhost:8080/review/${getId()}`,
         data: {},
         success: function (response) {
             let share_title = response['title'];

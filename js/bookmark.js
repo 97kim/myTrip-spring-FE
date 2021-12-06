@@ -89,7 +89,7 @@ function slide2() {
 function showPopularBookmarks() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/popular/bookmark?type=popular",
+        url: "http://localhost:8080/theme/bookmark?type=popular",
         contentType: "application/json",
         data: {},
         success: function (response) {
@@ -129,7 +129,7 @@ function movePopularDetail(content_id) {
 function showNearBookmarks() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/near/bookmark?type=near",
+        url: "http://localhost:8080/nearspot/bookmark?type=near",
         contentType: "application/json",
         data: {},
         success: function (response) {

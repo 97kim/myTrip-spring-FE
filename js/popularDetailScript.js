@@ -6,7 +6,7 @@ function getId_popular() {
 function getDetailIntro() {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/popular/${getId_popular()}`,
+        url: `http://localhost:8080/theme/${getId_popular()}`,
         data: {},
         async: false,
         success: function (response) {
@@ -77,7 +77,7 @@ function weather_popular() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/popular/weather",
+        url: "http://localhost:8080/theme/weather",
         contentType: "application/json",
         data: JSON.stringify({
             place_lat: place_lat,
@@ -117,7 +117,7 @@ function toggle_bookmark_popular(content_id) {
         if ($('#bookmark').hasClass("fas")) {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/popular/bookmark",
+                url: "http://localhost:8080/theme/bookmark",
                 contentType: "application/json",
                 data: JSON.stringify({
                     content_id: content_id,
@@ -133,7 +133,7 @@ function toggle_bookmark_popular(content_id) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/popular/bookmark",
+                url: "http://localhost:8080/theme/bookmark",
                 contentType: "application/json",
                 data: JSON.stringify({
                     content_id: content_id,
@@ -154,7 +154,7 @@ function toggle_bookmark_popular(content_id) {
 function getBookmark_popular() {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/popular/bookmark/${getId_popular()}`,
+        url: `http://localhost:8080/theme/bookmark/${getId_popular()}`,
         data: {},
         success: function (response) {
             if (response['bookmarkStatus'] == true) {
