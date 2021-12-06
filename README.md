@@ -3,7 +3,7 @@
 
 ## FE
 - AWS S3에 올려 AWS Cloudfront와 연결
-- CORS는 BE에서 스프링 시큐리티에서 처리
+- CORS는 백엔드 스프링 시큐리티에서 처리
 
 <hr>
 
