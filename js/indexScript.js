@@ -134,7 +134,7 @@ function geoInfo() {
 
         $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/nearspot",
+                url: "https://api.kimkj.shop/nearspot",
                 contentType: "application/json",
                 data: JSON.stringify(
                     {place_lat: lat, place_lng: lng}),
@@ -195,7 +195,7 @@ function showTripReviews(type) {
     $('#index_trip_card').empty();
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/reviews/${type}`,
+        url: `https://api.kimkj.shop/reviews/${type}`,
         contentType: 'application/json; charset=utf-8',
         success: function (response) {
             for (let i = 0; i < response.length; i++) {
@@ -244,7 +244,7 @@ function moveTripDetail(trip_id) {
 function showPopularTrips() {
     $.ajax({
         type: 'GET',
-        url: "http://localhost:8080/theme",
+        url: "https://api.kimkj.shop/theme",
         data: {},
         success: function (response) {
             $('#popular_card').empty();
