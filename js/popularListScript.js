@@ -43,7 +43,7 @@ function popularList(quantity) {
 
     $.ajax({
             type: "POST",
-            url: "http://localhost:8080/popular/list",
+            url: "http://localhost:8080/themes",
             contentType: "application/json",
             data: JSON.stringify({
                 quantity: quantity,

@@ -19,7 +19,7 @@ function update() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/userReview",
+        url: "http://localhost:8080/review",
         contentType: false,
         processData: false,
         data: userReview,

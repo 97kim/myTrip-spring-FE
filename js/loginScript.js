@@ -19,7 +19,7 @@ function sign_in() {
     }
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/sign-in",
+        url: "http://localhost:8080/signin",
         contentType: "application/json",
         data: JSON.stringify({
             username: username,
@@ -75,7 +75,7 @@ function sign_up() {
     }
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/sign-up/save",
+        url: "http://localhost:8080/signup",
         contentType: "application/json",
         data: JSON.stringify({
             username: username,
@@ -123,7 +123,7 @@ function check_dup() {
     $("#help-id").addClass("is-loading")
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/sign-up/check-dup",
+        url: "http://localhost:8080/signup/check",
         contentType: "application/json",
         data: JSON.stringify({
             username: username
