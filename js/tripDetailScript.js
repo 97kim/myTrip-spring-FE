@@ -31,7 +31,7 @@ function getUserReview(reviewId) {
 function postUserReview(reviewId) {
     let UserReviewComment = $('#comment_content').val();
 
-    if (UserReviewComment.replaceAll(" ","").replaceAll("　", "") == "") {
+    if (UserReviewComment.replaceAll(" ", "").replaceAll("　", "") == "") {
         return alert("댓글을 입력해주세요")
     }
 
@@ -112,7 +112,8 @@ function deleteComment(comment_id) {
                 showComments();
             }
         });
-    };
+    }
+    ;
 }
 
 
