@@ -19,7 +19,7 @@ function update() {
 
     $.ajax({
         type: "POST",
-        url: "https://api.kimkj.shop/review",
+        url: "http://localhost:8080/review",
         contentType: false,
         processData: false,
         data: userReview,
