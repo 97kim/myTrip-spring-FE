@@ -6,7 +6,7 @@ function getId_popular() {
 function getDetailIntro() {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/theme/${getId_popular()}`,
+        url: `http://localhost:8080/themes/${getId_popular()}`,
         data: {},
         async: false,
         success: function (response) {
@@ -77,7 +77,7 @@ function weather_popular() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/theme/weather",
+        url: "http://localhost:8080/weathers",
         contentType: "application/json",
         data: JSON.stringify({
             place_lat: place_lat,
