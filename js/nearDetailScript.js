@@ -77,7 +77,7 @@ function weather() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/weathers",
+        url: "http://localhost:8080/weather",
         contentType: "application/json",
         data: JSON.stringify({
             place_lat: place_lat,
