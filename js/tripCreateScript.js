@@ -7,7 +7,6 @@ function postUserReview() {
     if (title.replaceAll(" ", "") == "" || place.replaceAll(" ", "") == "") {
         return alert("제목과 장소는 필수로 입력해주세요")
     }
-
     let data = {
         title: title,
         place: place,
