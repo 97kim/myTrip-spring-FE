@@ -20,7 +20,6 @@ function postUserReview() {
     userReview.append("review_data", new Blob([JSON.stringify(data)], {type: "application/json"}))
     userReview.append("review_img", review_img);
 
-    alert(title)
     $.ajax({
         type: "POST",
         url: "http://localhost:8080/reviews",
