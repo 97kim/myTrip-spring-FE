@@ -6,7 +6,7 @@ function getId() {
 function getUserReview(reviewId) {
     $.ajax({
         type: "GET",
-        url: `https://api.kimkj.shop/review/${reviewId}`,
+        url: `http://localhost:8080/reviews/${reviewId}`,
         success: function (response) {
             $('#title').text(response['title']);
             $('#place').text(response['place']);
@@ -37,7 +37,7 @@ function postUserReview(reviewId) {
 
     $.ajax({
         type: "POST",
-        url: `https://api.kimkj.shop/review/comment/${reviewId}`,
+        url: `http://localhost:8080/review/comment/${reviewId}`,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({comment: UserReviewComment}),
         statusCode: {
@@ -57,7 +57,7 @@ function showComments() {
     $('#comment_list').empty();
     $.ajax({
         type: "GET",
-        url: `https://api.kimkj.shop/review/comment/${getId()}`,
+        url: `http://localhost:8080/review/comment/${getId()}`,
         data: {},
         success: function (response) {
             for (let i = 0; i < response.length; i++) {
@@ -106,7 +106,7 @@ function deleteComment(comment_id) {
     if (confirm("삭제하시겠습니까?") === true) {
         $.ajax({
             type: "DELETE",
-            url: `https://api.kimkj.shop/review/comment/${comment_id}`,
+            url: `http://localhost:8080/review/comment/${comment_id}`,
             data: {},
             success: function (response) {
                 showComments();
@@ -139,7 +139,7 @@ function updateComment(commentId) {
     console.log(UserReviewComment)
     $.ajax({
         type: "POST",
-        url: `https://api.kimkj.shop/review/comment/${getId()}`,
+        url: `http://localhost:8080/review/comment/${getId()}`,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(UserReviewComment),
         statusCode: {
@@ -158,18 +158,18 @@ function updateComment(commentId) {
 
 // 리뷰 수정 화면에서 input 창에 이전 데이터 값 보이게 함
 function updateUserReview(id) {
-    $.ajax({
-        type: "GET",
-        url: `https://api.kimkj.shop/review/${id}`,
-        success: function (response) {
-            sessionStorage.setItem('title', response['title']);
-            sessionStorage.setItem('place', response['place']);
-            sessionStorage.setItem('review', response['review']);
-            sessionStorage.setItem('file', response['reviewImgUrl']);
 
-            window.location.href = `../templates/tripUpdate.html?id=${id}`;
-        }
-    });
+    if (!localStorage.getItem('token')) {
+        alert('로그인이 필요한 서비스입니다.')
+        window.location.href = "../templates/login.html"
+    } else {
+        sessionStorage.setItem("title", $("#title").text())
+        sessionStorage.setItem("place", $("#place").text())
+        sessionStorage.setItem("review", $("#review").text())
+        sessionStorage.setItem("file", $("#file").attr("src"))
+
+        window.location.href = `../templates/tripUpdate.html?id=${id}`;
+    }
 }
 
 
@@ -178,7 +178,7 @@ function deleteUserReview(id) {
     if (confirm("삭제 하시겠습니까?") === true) {
         $.ajax({
             type: "DELETE",
-            url: `https://api.kimkj.shop/review/${id}`,
+            url: `http://localhost:8080/review/${id}`,
             data: {},
             success: function (response) {
                 window.location.href = "../templates/tripsList.html";
@@ -200,7 +200,7 @@ function userReviewLike(trip_id) {
 
             $.ajax({
                 type: "POST",
-                url: "https://api.kimkj.shop/review/like",
+                url: "http://localhost:8080/review/like",
                 contentType: "application/json",
                 data: JSON.stringify({
                     user_review_id: trip_id,
@@ -215,7 +215,7 @@ function userReviewLike(trip_id) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "https://api.kimkj.shop/review/like",
+                url: "http://localhost:8080/review/like",
                 contentType: "application/json",
                 data: JSON.stringify({
                     user_review_id: trip_id,
@@ -233,7 +233,7 @@ function userReviewLike(trip_id) {
 function get_like(id) {
     $.ajax({
         type: "GET",
-        url: `https://api.kimkj.shop/review/like/${id}`,
+        url: `http://localhost:8080/review/like/${id}`,
         data: {},
         success: function (response) {
             if (response['likeStatus'] == true) {
@@ -250,7 +250,7 @@ function get_like(id) {
 function kakaoShare() {
     $.ajax({
         type: "GET",
-        url: `https://api.kimkj.shop/review/${getId()}`,
+        url: `http://localhost:8080/review/${getId()}`,
         data: {},
         success: function (response) {
             let share_title = response['title'];

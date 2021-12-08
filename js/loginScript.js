@@ -17,9 +17,10 @@ function sign_in() {
     } else {
         $("#help-password-login").text("")
     }
+
     $.ajax({
         type: "POST",
-        url: "https://api.kimkj.shop/signin",
+        url: "http://localhost:8080/signin",
         contentType: "application/json",
         data: JSON.stringify({
             username: username,
@@ -75,7 +76,7 @@ function sign_up() {
     }
     $.ajax({
         type: "POST",
-        url: "https://api.kimkj.shop/signup",
+        url: "http://localhost:8080/signup",
         contentType: "application/json",
         data: JSON.stringify({
             username: username,
@@ -123,7 +124,7 @@ function check_dup() {
     $("#help-id").addClass("is-loading")
     $.ajax({
         type: "POST",
-        url: "https://api.kimkj.shop/signup/check",
+        url: "http://localhost:8080/signup/check",
         contentType: "application/json",
         data: JSON.stringify({
             username: username

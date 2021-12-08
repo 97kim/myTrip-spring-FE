@@ -6,7 +6,7 @@ function getId() {
 function getDetailIntro() {
     $.ajax({
         type: "GET",
-        url: `https://api.kimkj.shop/nearspot/${getId()}`,
+        url: `http://localhost:8080/nearspot/${getId()}`,
         data: {},
         async: false,
         success: function (response) {
@@ -77,7 +77,7 @@ function weather() {
 
     $.ajax({
         type: "POST",
-        url: "https://api.kimkj.shop/nearspot/weather",
+        url: "http://localhost:8080/nearspot/weather",
         contentType: "application/json",
         data: JSON.stringify({
             place_lat: place_lat,
@@ -118,7 +118,7 @@ function toggle_bookmark(content_id) {
         if ($('#bookmark').hasClass("fas")) {
             $.ajax({
                 type: "POST",
-                url: "https://api.kimkj.shop/nearspot/bookmark",
+                url: "http://localhost:8080/nearspot/bookmark",
                 contentType: "application/json",
                 data: JSON.stringify({
                     content_id: content_id,
@@ -135,7 +135,7 @@ function toggle_bookmark(content_id) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "https://api.kimkj.shop/nearspot/bookmark",
+                url: "http://localhost:8080/nearspot/bookmark",
                 contentType: "application/json",
                 data: JSON.stringify({
                     content_id: content_id,
@@ -157,7 +157,7 @@ function toggle_bookmark(content_id) {
 function getBookmark() {
     $.ajax({
         type: "GET",
-        url: `https://api.kimkj.shop/nearspot/bookmark/${getId()}`,
+        url: `http://localhost:8080/nearspot/bookmark/${getId()}`,
         data: {},
         success: function (response) {
             if (response['bookmarkStatus'] == true) {
