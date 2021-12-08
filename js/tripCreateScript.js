@@ -7,6 +7,7 @@ function postUserReview() {
     if (title.replaceAll(" ", "") == "" || place.replaceAll(" ", "") == "") {
         return alert("제목과 장소는 필수로 입력해주세요")
     }
+
     let data = {
         title: title,
         place: place,
@@ -21,7 +22,7 @@ function postUserReview() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/reviews",
+        url: "http://localhost:8080/review",
         contentType: false,
         processData: false,
         data: userReview,
