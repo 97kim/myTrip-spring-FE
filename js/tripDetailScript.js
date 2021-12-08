@@ -155,20 +155,21 @@ function updateComment(commentId) {
 }
 
 
+
 // 리뷰 수정 화면에서 input 창에 이전 데이터 값 보이게 함
 function updateUserReview(id) {
-    $.ajax({
-        type: "GET",
-        url: `http://localhost:8080/review/${id}`,
-        success: function (response) {
-            sessionStorage.setItem('title', response['title']);
-            sessionStorage.setItem('place', response['place']);
-            sessionStorage.setItem('review', response['review']);
-            sessionStorage.setItem('file', response['reviewImgUrl']);
 
-            window.location.href = `../templates/tripUpdate.html?id=${id}`;
-        }
-    });
+    if (!localStorage.getItem('token')) {
+        alert('로그인이 필요한 서비스입니다.')
+        window.location.href = "../templates/login.html"
+    } else {
+        sessionStorage.setItem("title", $("#title").text())
+        sessionStorage.setItem("place", $("#place").text())
+        sessionStorage.setItem("review", $("#review").text())
+        sessionStorage.setItem("file", $("#file").attr("src"))
+
+        window.location.href = `../templates/tripUpdate.html?id=${id}`;
+    }
 }
 
 
@@ -240,7 +241,7 @@ function get_like(id) {
 function kakaoShare() {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/review/${getId()}`,
+        url: `http://localhost:8080/reviews/${getId()}`,
         data: {},
         success: function (response) {
             let share_title = response['title'];

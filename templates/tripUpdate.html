@@ -47,16 +47,11 @@
 
     <script>
         $(document).ready(function () {
-            $('#title').val(sessionStorage.getItem('title'));
-            $('#place').val(sessionStorage.getItem('place'));
-            $('#review').val(sessionStorage.getItem('review'));
-
-            $('.image-upload-wrap').hide();
-
-            $('#img').attr('src', sessionStorage.getItem('file'));
-            $('.file-upload-content').show();
             navLoginCheck();
+            getItem()
         });
+
+
     </script>
 </head>
 

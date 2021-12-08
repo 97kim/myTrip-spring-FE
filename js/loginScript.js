@@ -17,6 +17,7 @@ function sign_in() {
     } else {
         $("#help-password-login").text("")
     }
+
     $.ajax({
         type: "POST",
         url: "http://localhost:8080/signin",
