@@ -6,7 +6,7 @@ function getId_popular() {
 function getDetailIntro() {
     $.ajax({
         type: "GET",
-        url: `https://api.kimkj.shop/theme/${getId_popular()}`,
+        url: `http://localhost:8080/themes/${getId_popular()}`,
         data: {},
         async: false,
         success: function (response) {
@@ -77,7 +77,7 @@ function weather_popular() {
 
     $.ajax({
         type: "POST",
-        url: "https://api.kimkj.shop/theme/weather",
+        url: "http://localhost:8080/weather",
         contentType: "application/json",
         data: JSON.stringify({
             place_lat: place_lat,
@@ -116,16 +116,9 @@ function toggle_bookmark_popular(content_id) {
     } else {
         if ($('#bookmark').hasClass("fas")) {
             $.ajax({
-                type: "POST",
-                url: "https://api.kimkj.shop/theme/bookmark",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    content_id: content_id,
-                    type: "popular",
-                    action: "uncheck",
-                    title: title,
-                    img_url: file
-                }),
+                type: "DELETE",
+                url: `http://localhost:8080/themes/${content_id}/bookmark`,
+                data: {},
                 success: function (response) {
                     $('#bookmark').removeClass("fas").addClass("far")
                 }
@@ -133,11 +126,9 @@ function toggle_bookmark_popular(content_id) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "https://api.kimkj.shop/theme/bookmark",
+                url: `http://localhost:8080/themes/${content_id}/bookmark`,
                 contentType: "application/json",
                 data: JSON.stringify({
-                    content_id: content_id,
-                    action: "check",
                     type: "popular",
                     title: title,
                     img_url: file
@@ -154,7 +145,7 @@ function toggle_bookmark_popular(content_id) {
 function getBookmark_popular() {
     $.ajax({
         type: "GET",
-        url: `https://api.kimkj.shop/theme/bookmark/${getId_popular()}`,
+        url: `http://localhost:8080/themes/${getId_popular()}/bookmark`,
         data: {},
         success: function (response) {
             if (response['bookmarkStatus'] == true) {
