@@ -25,7 +25,6 @@ function sign_in() {
             loginCheck: "login",
             username: username,
             password: password,
-            loginCheck: "signin"
         }),
         statusCode: {
             401: () => alert('아이디/비밀번호를 확인해주세요.')
@@ -83,7 +82,6 @@ function sign_up() {
             loginCheck: "signup",
             username: username,
             password: password,
-            loginCheck: "signup"
         }),
         success: function (response) {
             alert("회원가입을 축하드립니다!");
