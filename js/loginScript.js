@@ -20,11 +20,12 @@ function sign_in() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/signin",
+        url: "http://localhost:8080/login",
         contentType: "application/json",
         data: JSON.stringify({
             username: username,
-            password: password
+            password: password,
+            loginCheck: "signin"
         }),
         statusCode: {
             401: () => alert('아이디/비밀번호를 확인해주세요.')
@@ -76,11 +77,12 @@ function sign_up() {
     }
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/signup",
+        url: "http://localhost:8080/login",
         contentType: "application/json",
         data: JSON.stringify({
             username: username,
-            password: password
+            password: password,
+            loginCheck: "signup"
         }),
         success: function (response) {
             alert("회원가입을 축하드립니다!");
