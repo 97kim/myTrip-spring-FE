@@ -17,12 +17,12 @@ function sign_in() {
     } else {
         $("#help-password-login").text("")
     }
-
     $.ajax({
         type: "POST",
         url: "http://localhost:8080/login",
         contentType: "application/json",
         data: JSON.stringify({
+            loginCheck: "login",
             username: username,
             password: password,
             loginCheck: "signin"
@@ -80,6 +80,7 @@ function sign_up() {
         url: "http://localhost:8080/login",
         contentType: "application/json",
         data: JSON.stringify({
+            loginCheck: "signup",
             username: username,
             password: password,
             loginCheck: "signup"
