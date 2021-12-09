@@ -130,7 +130,6 @@ function showUpdateCommentModel(commentId) {
 // 댓글 수정하기
 function updateComment(commentId) {
     let comment = $(`#${commentId}_comment_update_input`).val();
-    $(`#${commentId}_comment_update_input`).val()
     if (comment == "") {
         return alert("수정할 댓글을 입력해주세요")
     }
