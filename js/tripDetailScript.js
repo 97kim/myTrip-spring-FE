@@ -248,8 +248,8 @@ function kakaoShare() {
             let share_title = response['title'];
             let share_place = response['place'];
             let share_img = response['reviewImgUrl'];
-            let share_like = 0; // 좋아요 기능 완료되면 수정
-            let share_comment_count = 0; // 댓글 기능 완료되면 수정
+            let share_like = response['userReviewLikes'].length // 좋아요 수
+            let share_comment_count = response['comments'].length // 댓글 수
 
             Kakao.Link.sendDefault({
                 objectType: 'feed',
@@ -264,7 +264,7 @@ function kakaoShare() {
                 },
                 // 나중에 변수 추가할 것임!!
                 social: {
-                    likeCount: parseInt(share_like),
+                    likeCount: share_like,
                     commentCount: share_comment_count,
                     sharedCount: 1
                 },
