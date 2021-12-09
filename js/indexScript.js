@@ -133,11 +133,10 @@ function geoInfo() {
         sessionStorage.setItem('type', 'trip');
 
         $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/nearspot",
+                type: "GET",
+                url: `http://localhost:8080/nearspots?lat=${lat}&lng=${lng}`,
                 contentType: "application/json",
-                data: JSON.stringify(
-                    {place_lat: lat, place_lng: lng}),
+                data: {},
                 success: function (response) {
                     $('#near_card').empty();
                     response = JSON.parse(response)
@@ -244,7 +243,7 @@ function moveTripDetail(trip_id) {
 function showPopularTrips() {
     $.ajax({
         type: 'GET',
-        url: "http://localhost:8080/theme",
+        url: "http://localhost:8080/themes",
         data: {},
         success: function (response) {
             $('#popular_card').empty();

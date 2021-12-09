@@ -37,7 +37,7 @@ function postUserReview(reviewId) {
 
     $.ajax({
         type: "POST",
-        url: `http://localhost:8080/review/comment/${reviewId}`,
+        url: `http://localhost:8080/reviews/${reviewId}/comment`,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({comment: UserReviewComment}),
         statusCode: {
@@ -57,7 +57,7 @@ function showComments() {
     $('#comment_list').empty();
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/review/comment/${getId()}`,
+        url: `http://localhost:8080/reviews/${getId()}/comments`,
         data: {},
         success: function (response) {
             for (let i = 0; i < response.length; i++) {
@@ -77,12 +77,12 @@ function showComments() {
                                         </div>
                                         <a id="${commentId}_update" href="javascript:showUpdateCommentModel(${commentId})" style="display: none;"><i class="fas fa-edit" style="color: #6E85B2;"></i></a>
                                         <a id="${commentId}_delete" href="javascript:deleteComment(${commentId})" style="display: none;"><i class="fas fa-trash-alt" style="color: #6E85B2;"></i></a>
-                                         </div>
-                                        <div style="margin: 5px 0 0 5px; word-break:break-all; font-size: 14px; font-weight: 400;">${comment}</div>
-                                        <div id="${commentId}CommentUpdateInputModel" class="form-post" style="display:none">
-                                            <textarea id="${commentId}_comment_update_input" style="width: 100%;" placeholder="수정하실 댓글을 입력하세요" style="display: none"></textarea>
-                                            <a onclick="updateComment(${commentId})" class="button alt">수정하기</a>
-                                        </div>
+                                    </div>
+                                    <div style="margin: 5px 0 0 5px; word-break:break-all; font-size: 14px; font-weight: 400;">${comment}</div>
+                                    <div id="${commentId}CommentUpdateInputModel" class="form-post" style="display:none">
+                                        <textarea id="${commentId}_comment_update_input" style="width: 100%;" placeholder="수정하실 댓글을 입력하세요" style="display: none"></textarea>
+                                        <a onclick="updateComment(${commentId})" class="button alt">수정하기</a>
+                                    </div>
                                  </div>`;
 
                 $('#comment_list').append(html_temp);
@@ -106,7 +106,7 @@ function deleteComment(comment_id) {
     if (confirm("삭제하시겠습니까?") === true) {
         $.ajax({
             type: "DELETE",
-            url: `http://localhost:8080/review/comment/${comment_id}`,
+            url: `http://localhost:8080/reviews/${getId()}/comments/${comment_id}`,
             data: {},
             success: function (response) {
                 showComments();
@@ -136,10 +136,9 @@ function updateComment(commentId) {
         commentId: commentId,
         comment: comment
     }
-    console.log(UserReviewComment)
     $.ajax({
-        type: "POST",
-        url: `http://localhost:8080/review/comment/${getId()}`,
+        type: "PUT",
+        url: `http://localhost:8080/reviews/${getId()}/comments/${commentId}`,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(UserReviewComment),
         statusCode: {
@@ -154,6 +153,7 @@ function updateComment(commentId) {
         }
     });
 }
+
 
 
 // 리뷰 수정 화면에서 input 창에 이전 데이터 값 보이게 함
@@ -178,7 +178,7 @@ function deleteUserReview(id) {
     if (confirm("삭제 하시겠습니까?") === true) {
         $.ajax({
             type: "DELETE",
-            url: `http://localhost:8080/review/${id}`,
+            url: `http://localhost:8080/reviews/${id}`,
             data: {},
             success: function (response) {
                 window.location.href = "../templates/tripsList.html";
@@ -200,13 +200,8 @@ function userReviewLike(trip_id) {
 
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/review/like",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    user_review_id: trip_id,
-
-                    action: "check"
-                }),
+                url: `http://localhost:8080/reviews/${trip_id}/like`,
+                data: {},
                 success: function (response) {
                     getUserReview(getId())
                     $('#like').removeClass("far").addClass("fas")
@@ -214,13 +209,9 @@ function userReviewLike(trip_id) {
             })
         } else {
             $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/review/like",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    user_review_id: trip_id,
-                    action: "uncheck"
-                }),
+                type: "DELETE",
+                url: `http://localhost:8080/reviews/${trip_id}/like`,
+                data: {},
                 success: function (response) {
                     getUserReview(getId())
                     $('#like').removeClass("fas").addClass("far")
@@ -233,7 +224,7 @@ function userReviewLike(trip_id) {
 function get_like(id) {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/review/like/${id}`,
+        url: `http://localhost:8080/reviews/${id}/like`,
         data: {},
         success: function (response) {
             if (response['likeStatus'] == true) {
@@ -250,7 +241,7 @@ function get_like(id) {
 function kakaoShare() {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/review/${getId()}`,
+        url: `http://localhost:8080/reviews/${getId()}`,
         data: {},
         success: function (response) {
             let share_title = response['title'];
