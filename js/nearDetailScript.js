@@ -118,7 +118,7 @@ function toggle_bookmark(content_id) {
         if ($('#bookmark').hasClass("fas")) {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/nearspot/bookmark",
+                url: `http://localhost:8080/nearspots/${content_id}/bookmark`,
                 contentType: "application/json",
                 data: JSON.stringify({
                     content_id: content_id,
@@ -135,7 +135,7 @@ function toggle_bookmark(content_id) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/nearspot/bookmark",
+                url: `http://localhost:8080/nearspots/${content_id}/bookmark`,
                 contentType: "application/json",
                 data: JSON.stringify({
                     content_id: content_id,
@@ -157,7 +157,7 @@ function toggle_bookmark(content_id) {
 function getBookmark() {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/nearspot/bookmark/${getId()}`,
+        url: `http://localhost:8080/nearspots/${getId()}/bookmark`,
         data: {},
         success: function (response) {
             if (response['bookmarkStatus'] == true) {
