@@ -17,12 +17,12 @@ function sign_in() {
     } else {
         $("#help-password-login").text("")
     }
-
     $.ajax({
         type: "POST",
-        url: "https://api.kimkj.shop/signin",
+        url: "https://api.kimkj.shop/login",
         contentType: "application/json",
         data: JSON.stringify({
+            loginCheck: "login",
             username: username,
             password: password
         }),
@@ -33,7 +33,7 @@ function sign_in() {
             localStorage.setItem('token', response['token']);
             localStorage.setItem('username', response['username']);
             alert("로그인 되었습니다!!");
-            window.location.href = '../index.html';
+            window.location.href = '../templates/index.html';
         }
     });
 }
@@ -76,15 +76,16 @@ function sign_up() {
     }
     $.ajax({
         type: "POST",
-        url: "https://api.kimkj.shop/signup",
+        url: "https://api.kimkj.shop/login",
         contentType: "application/json",
         data: JSON.stringify({
+            loginCheck: "signup",
             username: username,
             password: password
         }),
         success: function (response) {
             alert("회원가입을 축하드립니다!");
-            window.location.href = "../login.html";
+            window.location.href = "../templates/login.html";
         }
     });
 }
