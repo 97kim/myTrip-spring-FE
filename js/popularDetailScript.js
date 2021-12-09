@@ -129,7 +129,6 @@ function toggle_bookmark_popular(content_id) {
                 url: `http://localhost:8080/themes/${content_id}/bookmark`,
                 contentType: "application/json",
                 data: JSON.stringify({
-                    type: "popular",
                     title: title,
                     img_url: file
                 }),
