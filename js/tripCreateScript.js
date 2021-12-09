@@ -22,7 +22,7 @@ function postUserReview() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/review",
+        url: "https://api.kimkj.shop/review",
         contentType: false,
         processData: false,
         data: userReview,

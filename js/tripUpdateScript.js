@@ -18,7 +18,7 @@ function update(reviewId) {
 
     $.ajax({
         type: "PUT",
-        url: `http://localhost:8080/reviews/${reviewId}`,
+        url: `https://api.kimkj.shop/reviews/${reviewId}`,
         contentType: false,
         processData: false,
         data: userReview,

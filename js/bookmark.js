@@ -89,7 +89,7 @@ function slide2() {
 function showPopularBookmarks() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/bookmarks?type=popular",
+        url: "https://api.kimkj.shop/bookmarks?type=popular",
         contentType: "application/json",
         data: {},
         success: function (response) {
@@ -129,7 +129,7 @@ function movePopularDetail(content_id) {
 function showNearBookmarks() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/bookmarks?type=near",
+        url: "https://api.kimkj.shop/bookmarks?type=near",
         contentType: "application/json",
         data: {},
         success: function (response) {

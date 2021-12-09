@@ -20,7 +20,7 @@ function sign_in() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/signin",
+        url: "https://api.kimkj.shop/signin",
         contentType: "application/json",
         data: JSON.stringify({
             username: username,
@@ -76,7 +76,7 @@ function sign_up() {
     }
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/signup",
+        url: "https://api.kimkj.shop/signup",
         contentType: "application/json",
         data: JSON.stringify({
             username: username,
@@ -124,7 +124,7 @@ function check_dup() {
     $("#help-id").addClass("is-loading")
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/signup/check",
+        url: "https://api.kimkj.shop/signup/check",
         contentType: "application/json",
         data: JSON.stringify({
             username: username

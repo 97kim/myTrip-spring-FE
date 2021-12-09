@@ -6,7 +6,7 @@ function getId_popular() {
 function getDetailIntro() {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/themes/${getId_popular()}`,
+        url: `https://api.kimkj.shop/themes/${getId_popular()}`,
         data: {},
         async: false,
         success: function (response) {
@@ -77,7 +77,7 @@ function weather_popular() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/weather",
+        url: "https://api.kimkj.shop/weather",
         contentType: "application/json",
         data: JSON.stringify({
             place_lat: place_lat,
@@ -117,7 +117,7 @@ function toggle_bookmark_popular(content_id) {
         if ($('#bookmark').hasClass("fas")) {
             $.ajax({
                 type: "DELETE",
-                url: `http://localhost:8080/themes/${content_id}/bookmark`,
+                url: `https://api.kimkj.shop/themes/${content_id}/bookmark`,
                 data: {},
                 success: function (response) {
                     $('#bookmark').removeClass("fas").addClass("far")
@@ -126,7 +126,7 @@ function toggle_bookmark_popular(content_id) {
         } else {
             $.ajax({
                 type: "POST",
-                url: `http://localhost:8080/themes/${content_id}/bookmark`,
+                url: `https://api.kimkj.shop/themes/${content_id}/bookmark`,
                 contentType: "application/json",
                 data: JSON.stringify({
                     title: title,
@@ -144,7 +144,7 @@ function toggle_bookmark_popular(content_id) {
 function getBookmark_popular() {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/themes/${getId_popular()}/bookmark`,
+        url: `https://api.kimkj.shop/themes/${getId_popular()}/bookmark`,
         data: {},
         success: function (response) {
             if (response['bookmarkStatus'] == true) {
