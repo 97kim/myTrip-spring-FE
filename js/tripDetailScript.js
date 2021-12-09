@@ -77,12 +77,12 @@ function showComments() {
                                         </div>
                                         <a id="${commentId}_update" href="javascript:showUpdateCommentModel(${commentId})" style="display: none;"><i class="fas fa-edit" style="color: #6E85B2;"></i></a>
                                         <a id="${commentId}_delete" href="javascript:deleteComment(${commentId})" style="display: none;"><i class="fas fa-trash-alt" style="color: #6E85B2;"></i></a>
-                                         </div>
-                                        <div style="margin: 5px 0 0 5px; word-break:break-all; font-size: 14px; font-weight: 400;">${comment}</div>
-                                        <div id="${commentId}CommentUpdateInputModel" class="form-post" style="display:none">
-                                            <textarea id="${commentId}_comment_update_input" style="width: 100%;" placeholder="수정하실 댓글을 입력하세요" style="display: none"></textarea>
-                                            <a onclick="updateComment(${commentId})" class="button alt">수정하기</a>
-                                        </div>
+                                    </div>
+                                    <div style="margin: 5px 0 0 5px; word-break:break-all; font-size: 14px; font-weight: 400;">${comment}</div>
+                                    <div id="${commentId}CommentUpdateInputModel" class="form-post" style="display:none">
+                                        <textarea id="${commentId}_comment_update_input" style="width: 100%;" placeholder="수정하실 댓글을 입력하세요" style="display: none"></textarea>
+                                        <a onclick="updateComment(${commentId})" class="button alt">수정하기</a>
+                                    </div>
                                  </div>`;
 
                 $('#comment_list').append(html_temp);
@@ -176,7 +176,7 @@ function deleteUserReview(id) {
     if (confirm("삭제 하시겠습니까?") === true) {
         $.ajax({
             type: "DELETE",
-            url: `https://api.kimkj.shop/review/${id}`,
+            url: `http://localhost:8080/reviews/${id}`,
             data: {},
             success: function (response) {
                 window.location.href = "../templates/tripsList.html";

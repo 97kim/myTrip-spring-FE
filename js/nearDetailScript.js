@@ -117,17 +117,9 @@ function toggle_bookmark(content_id) {
     } else {
         if ($('#bookmark').hasClass("fas")) {
             $.ajax({
-                type: "POST",
+                type: "DELETE",
                 url: `http://localhost:8080/nearspots/${content_id}/bookmark`,
-                contentType: "application/json",
-                data: JSON.stringify({
-                    content_id: content_id,
-                    action: "uncheck",
-                    type: "near",
-                    title: title,
-                    address: address,
-                    img_url: file
-                }),
+                data: {},
                 success: function (response) {
                     $('#bookmark').removeClass("fas").addClass("far")
                 }

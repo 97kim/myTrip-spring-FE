@@ -135,7 +135,6 @@ function geoInfo() {
         $.ajax({
                 type: "GET",
                 url: `http://localhost:8080/nearspots?lat=${lat}&lng=${lng}`,
-                contentType: "application/json",
                 data: {},
                 success: function (response) {
                     $('#near_card').empty();
