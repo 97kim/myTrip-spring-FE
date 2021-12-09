@@ -228,7 +228,7 @@ function showTripReviews(type) {
                                             </div>
                                         </a>
                                     </li>`
-                $('#index_trip_card').prepend(temp_html);
+                $('#index_trip_card').append(temp_html);
                 slide2();
             }
         }
