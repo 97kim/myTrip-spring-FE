@@ -130,9 +130,6 @@ function toggle_bookmark(content_id) {
                 url: `http://localhost:8080/nearspots/${content_id}/bookmark`,
                 contentType: "application/json",
                 data: JSON.stringify({
-                    content_id: content_id,
-                    action: "check",
-                    type: "near",
                     title: title,
                     address: address,
                     img_url: file
