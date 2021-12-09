@@ -4,12 +4,11 @@ function getId() {
 }
 
 // 사용자 여행 리뷰 수정
-function update() {
+function update(reviewId) {
     let data = {
-        id: getId(),
         title: $('#title').val(),
         place: $('#place').val(),
-        review: $('#review').val()
+        review: $('#review').val(),
     }
     let review_img = $('#file')[0].files[0];
     let userReview = new FormData();
@@ -18,16 +17,25 @@ function update() {
     userReview.append("review_img", review_img);
 
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/review",
+        type: "PUT",
+        url: `http://localhost:8080/reviews/${reviewId}`,
         contentType: false,
         processData: false,
         data: userReview,
         success: function (response) {
-            alert("완료!");
-            window.location.href = `../templates/tripDetail.html?id=${getId()}`;
+            alert("수정을 완료했습니다.")
+            window.location.href = '../templates/tripsList.html';
         }
-    });
+    })
+}
+
+function getItem() {
+    $('.image-upload-wrap').hide();
+    $('#img').attr('src', sessionStorage.getItem('file'));
+    $('.file-upload-content').show();
+    $("#title").val(sessionStorage.getItem("title"))
+    $("#place").val(sessionStorage.getItem("place"))
+    $("#review").val(sessionStorage.getItem("review"))
 }
 
 // 파일 업로더 js
