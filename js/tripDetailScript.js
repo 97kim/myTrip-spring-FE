@@ -48,6 +48,7 @@ function postUserReview(reviewId) {
         },
         success: function (response) {
             showComments();
+            $('#comment_content').val(""); // 댓글 작성 완료 후 입력창 비우기
         }
     });
 }
@@ -80,7 +81,7 @@ function showComments() {
                                     </div>
                                     <div style="margin: 5px 0 0 5px; word-break:break-all; font-size: 14px; font-weight: 400;">${comment}</div>
                                     <div id="${commentId}CommentUpdateInputModel" class="form-post" style="display:none">
-                                        <textarea id="${commentId}_comment_update_input" style="width: 100%;" placeholder="수정하실 댓글을 입력하세요" style="display: none"></textarea>
+                                        <textarea id="${commentId}_comment_update_input" style="width: 100%;" placeholder="수정하실 댓글을 입력하세요" style="display: none">${comment}</textarea>
                                         <a onclick="updateComment(${commentId})" class="button alt">수정하기</a>
                                     </div>
                                  </div>`;
