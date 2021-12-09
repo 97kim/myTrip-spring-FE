@@ -28,7 +28,7 @@ function postUserReview() {
         data: userReview,
         success: function (response) {
             alert("완료!");
-            window.location.href = '../templates/tripsList.html';
+            window.location.href = '../tripsList.html';
         }
     });
 }

@@ -181,7 +181,7 @@ function geoInfo() {
 }
 
 function moveNearDetail(content_id) {
-    window.location.href = `../templates/nearDetail.html?id=${content_id}`;
+    window.location.href = `../nearDetail.html?id=${content_id}`;
 }
 
 function onGeoError() { //위치 정보 공유 거부 시
@@ -236,7 +236,7 @@ function showTripReviews(type) {
 }
 
 function moveTripDetail(trip_id) {
-    window.location.href = `../templates/tripDetail.html?id=${trip_id}`;
+    window.location.href = `../tripDetail.html?id=${trip_id}`;
 }
 
 function showPopularTrips() {
@@ -302,7 +302,7 @@ function showPopularTrips() {
 }
 
 function movePopularDetail(content_id) {
-    window.location.href = `../templates/popularDetail.html?id=${content_id}`;
+    window.location.href = `../popularDetail.html?id=${content_id}`;
 }
 
 function covid() {
@@ -407,9 +407,9 @@ function checkAddress(code) {
 
 function writeTrip() {
     if (localStorage.getItem('token')) {
-        window.location.href = "../templates/tripCreate.html";
+        window.location.href = "../tripCreate.html";
     } else {
         alert('로그인이 필요한 서비스입니다.');
-        window.location.href = "../templates/login.html";
+        window.location.href = "../login.html";
     }
 }

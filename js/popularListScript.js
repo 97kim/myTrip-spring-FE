@@ -110,7 +110,7 @@ function popularList(quantity) {
 }
 
 function movePopularDetail(content_id) {
-    window.location.href = `../templates/popularDetail.html?id=${content_id}`;
+    window.location.href = `../popularDetail.html?id=${content_id}`;
 }
 
 function checkCovid(str) {

@@ -112,7 +112,7 @@ function toggle_bookmark_popular(content_id) {
 
     if (!localStorage.getItem('token')) {
         alert('로그인이 필요한 서비스입니다.')
-        window.location.href = "../templates/login.html"
+        window.location.href = "../login.html"
     } else {
         if ($('#bookmark').hasClass("fas")) {
             $.ajax({

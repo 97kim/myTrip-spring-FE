@@ -24,7 +24,7 @@ function update(reviewId) {
         data: userReview,
         success: function (response) {
             alert("수정을 완료했습니다.")
-            window.location.href = `../templates/tripDetail.html?id=${reviewId}`;
+            window.location.href = `../tripDetail.html?id=${reviewId}`;
         }
     })
 }

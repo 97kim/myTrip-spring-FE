@@ -33,7 +33,7 @@ function sign_in() {
             localStorage.setItem('token', response['token']);
             localStorage.setItem('username', response['username']);
             alert("로그인 되었습니다!!");
-            window.location.href = '../templates/index.html';
+            window.location.href = '../index.html';
         }
     });
 }
@@ -84,7 +84,7 @@ function sign_up() {
         }),
         success: function (response) {
             alert("회원가입을 축하드립니다!");
-            window.location.href = "../templates/login.html";
+            window.location.href = "../login.html";
         }
     });
 }
