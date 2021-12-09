@@ -117,17 +117,9 @@ function toggle_bookmark(content_id) {
     } else {
         if ($('#bookmark').hasClass("fas")) {
             $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/nearspot/bookmark",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    content_id: content_id,
-                    action: "uncheck",
-                    type: "near",
-                    title: title,
-                    address: address,
-                    img_url: file
-                }),
+                type: "DELETE",
+                url: `http://localhost:8080/nearspots/${content_id}/bookmark`,
+                data: {},
                 success: function (response) {
                     $('#bookmark').removeClass("fas").addClass("far")
                 }
@@ -135,11 +127,9 @@ function toggle_bookmark(content_id) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/nearspot/bookmark",
+                url: `http://localhost:8080/nearspots/${content_id}/bookmark`,
                 contentType: "application/json",
                 data: JSON.stringify({
-                    content_id: content_id,
-                    action: "check",
                     type: "near",
                     title: title,
                     address: address,
@@ -157,7 +147,7 @@ function toggle_bookmark(content_id) {
 function getBookmark() {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/nearspot/bookmark/${getId()}`,
+        url: `http://localhost:8080/nearspots/${getId()}/bookmark`,
         data: {},
         success: function (response) {
             if (response['bookmarkStatus'] == true) {

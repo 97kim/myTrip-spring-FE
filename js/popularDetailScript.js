@@ -116,16 +116,9 @@ function toggle_bookmark_popular(content_id) {
     } else {
         if ($('#bookmark').hasClass("fas")) {
             $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/theme/bookmark",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    content_id: content_id,
-                    type: "popular",
-                    action: "uncheck",
-                    title: title,
-                    img_url: file
-                }),
+                type: "DELETE",
+                url: `http://localhost:8080/themes/${content_id}/bookmark`,
+                data: {},
                 success: function (response) {
                     $('#bookmark').removeClass("fas").addClass("far")
                 }
@@ -133,11 +126,9 @@ function toggle_bookmark_popular(content_id) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/theme/bookmark",
+                url: `http://localhost:8080/themes/${content_id}/bookmark`,
                 contentType: "application/json",
                 data: JSON.stringify({
-                    content_id: content_id,
-                    action: "check",
                     type: "popular",
                     title: title,
                     img_url: file
@@ -154,7 +145,7 @@ function toggle_bookmark_popular(content_id) {
 function getBookmark_popular() {
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/theme/bookmark/${getId_popular()}`,
+        url: `http://localhost:8080/themes/${getId_popular()}/bookmark`,
         data: {},
         success: function (response) {
             if (response['bookmarkStatus'] == true) {
