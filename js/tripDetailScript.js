@@ -248,8 +248,8 @@ function kakaoShare() {
             let share_title = response['title'];
             let share_place = response['place'];
             let share_img = response['reviewImgUrl'];
-            let share_like = JSON.parse(response['likes']).length; // 좋아요 수
-            let share_comment_count = JSON.parse(response['comments']).length; // 댓글 수
+            let share_like = response['userReviewLikes'].length // 좋아요 수
+            let share_comment_count = response['comments'].length // 댓글 수
 
             Kakao.Link.sendDefault({
                 objectType: 'feed',
