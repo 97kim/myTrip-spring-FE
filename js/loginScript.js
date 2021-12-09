@@ -79,7 +79,7 @@ function sign_up() {
         url: "http://localhost:8080/login",
         contentType: "application/json",
         data: JSON.stringify({
-            loginCheck: "sign",
+            loginCheck: "signup",
             username: username,
             password: password
         }),
