@@ -156,7 +156,6 @@ function updateComment(commentId) {
 }
 
 
-
 // 리뷰 수정 화면에서 input 창에 이전 데이터 값 보이게 함
 function updateUserReview(id) {
 
