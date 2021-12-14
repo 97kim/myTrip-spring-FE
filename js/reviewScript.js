@@ -169,7 +169,7 @@ function updateUserReview(id) {
         sessionStorage.setItem("review", $("#review").text())
         sessionStorage.setItem("file", $("#file").attr("src"))
 
-        window.location.href = `../templates/tripCreate.html?id=${id}`;
+        window.location.href = `../templates/form.html?id=${id}`;
     }
 }
 
@@ -182,7 +182,7 @@ function deleteUserReview(id) {
             url: `http://localhost:8080/reviews/${id}`,
             data: {},
             success: function (response) {
-                window.location.href = "../templates/tripsList.html";
+                window.location.href = "../templates/reviews.html";
             }
         });
     }
