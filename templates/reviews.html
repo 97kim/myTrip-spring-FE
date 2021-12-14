@@ -7,10 +7,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--https 사이트에서 http 사이트 요청 시 발생하는 보안 문제 해결-->
-    <!--우리 사이트는 https이고 요청을 보내는 한국관광공사api 사이트는 http라서 발생했던 문제 해결-->
-    <!--?    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">-->
-
     <!--메타태그 설정-->
     <meta property="og:title" content="여행어때"/>
     <meta property="og:description" content="위치 기반 서비스로 근처의 여행지를 확인해보세요!"/>
@@ -43,23 +39,16 @@
     <!--외부 static 파일 불러오기-->
     <link rel="stylesheet" href="../css/public.css"/>
     <link rel="stylesheet" href="../css/listStyle.css"/>
-    <link rel="stylesheet" href="../css/loading.css"/>
-    <script type="text/javascript" src="../js/popularListScript.js"></script>
+    <script type="text/javascript" src="../js/reviewsScript.js"></script>
     <script type="text/javascript" src="../js/logoutScript.js"></script>
     <script type="text/javascript" src="../js/modalProfile.js"></script>
     <script type="text/javascript" src="../js/nav.js"></script>
     <script type="text/javascript" src="../js/ajaxPreFilter.js"></script>
 
     <script>
-        let perPage = "15";
-
         $(document).ready(function () {
-            popularList(perPage);
-            $("#perPagingSelect").change(function () {
-                perPage = $(this).val();
-                popularList(perPage)
-            })
             navLoginCheck();
+            showListSort('date');
         });
     </script>
 
@@ -74,19 +63,17 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="popularList.html">Popular</a>
+                    <a class="nav-link" href="themes.html">Popular</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="nearList.html">Near</a>
+                    <a class="nav-link" href="nearspots.html">Near</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="tripsList.html">Trips</a>
+                    <a class="nav-link" href="reviews.html">Trips</a>
                 </li>
             </ul>
-
             <ul class="navbar-nav" id="login-btn" style="display: none;">
                 <li class="nav-item">
                     <a class="nav-link" href="login.html">
@@ -112,39 +99,18 @@
         </div>
     </div>
 </nav>
-<div class="sort">
-    <div>
-        <a id="family" href="javascript:checkTheme(1, perPage)" style="text-decoration: none;">가족 여행</a>
-        <span> &nbsp; | &nbsp;</span>
-        <a id="alone" href="javascript:checkTheme(2, perPage)" style="text-decoration: none;">나홀로 여행</a>
-        <span> &nbsp; | &nbsp;</span>
-        <a id="healing" href="javascript:checkTheme(3, perPage)" style="text-decoration: none;">힐링 여행</a>
-        <span> &nbsp; | &nbsp;</span>
-        <a id="walking" href="javascript:checkTheme(4, perPage)" style="text-decoration: none;">걷기 좋은 여행</a>
-        <span> &nbsp; | &nbsp;</span>
-        <a id="camping" href="javascript:checkTheme(5, perPage)" style="text-decoration: none;">캠핑 여행</a>
-        <span> &nbsp; | &nbsp;</span>
-        <a id="famous_restaurant" href="javascript:checkTheme(6, perPage)" style="text-decoration: none;">맛집 여행</a>
-    </div>
-    <select style="width: 70px; margin: 5px 0;" id="perPagingSelect">
-        <option value="15">15</option>
-        <option value="20">20</option>
-        <option value="25">25</option>
-        <option value="30">30</option>
-    </select>
+
+<div class="sort d-flex align-items-center mb-3">
+    <a href="javascript:showListSort('date')">최근순</a>
+    <span> &nbsp; | &nbsp;</span>
+    <a href="javascript:showListSort('like')">좋아요순</a>
+    <a href='javascript:writeTrip()' class="ms-auto">작성하기</a>
 </div>
 
-<div class="before-render" style="width: 100%; height: 100vh;">
-    <div id="container-box">
-        <div id="dot"></div>
-        <div class="step" id="s1"></div>
-        <div class="step" id="s2"></div>
-        <div class="step" id="s3"></div>
-    </div>
+<div>
+    <ul id="trip_card" class="cards">
+    </ul>
 </div>
-
-<ul id="popular_card" class="cards">
-</ul>
 
 <!-- 모달 창 -->
 <div class="modal fade" id="profile_modal" tabindex="-1" aria-labelledby="profile_modal_label" aria-hidden="true">

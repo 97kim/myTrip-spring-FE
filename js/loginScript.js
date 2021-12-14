@@ -24,7 +24,7 @@ function sign_in() {
         data: JSON.stringify({
             loginCheck: "login",
             username: username,
-            password: password
+            password: password,
         }),
         statusCode: {
             401: () => alert('아이디/비밀번호를 확인해주세요.')
@@ -81,7 +81,7 @@ function sign_up() {
         data: JSON.stringify({
             loginCheck: "signup",
             username: username,
-            password: password
+            password: password,
         }),
         success: function (response) {
             alert("회원가입을 축하드립니다!");
