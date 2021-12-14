@@ -181,7 +181,7 @@ function geoInfo() {
 }
 
 function moveNearDetail(content_id) {
-    window.location.href = `../nearspot.html`;
+    window.location.href = `../nearspot.html?id=${content_id}`;
 }
 
 function onGeoError() { //위치 정보 공유 거부 시
@@ -302,7 +302,7 @@ function showPopularTrips() {
 }
 
 function movePopularDetail(content_id) {
-    window.location.href = `../theme.html`;
+    window.location.href = `../theme.html?id=${content_id}`;
 }
 
 function covid() {
