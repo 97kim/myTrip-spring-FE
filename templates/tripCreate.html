@@ -48,6 +48,14 @@
     <script>
         $(document).ready(function () {
             navLoginCheck();
+            if (!getId()) {
+                $('#write-btn').show();
+                $('#update-btn').hide();
+            } else {
+                getItem();
+                $('#write-btn').hide();
+                $('#update-btn').show();
+            }
         });
     </script>
 </head>
@@ -115,7 +123,7 @@
                 </div>
             </div>
             <div class="file-upload-content">
-                <img class="file-upload-image" src="#" alt="your image"/>
+                <img id="img" class="file-upload-image" src="#" alt="your image"/>
                 <div class="image-title-wrap">
                     <button type="button" onclick="removeUpload()" class="remove-image">지우기 - <span
                             class="image-title">Uploaded Image</span></button>
@@ -132,7 +140,10 @@
             <textarea class="review" id="review" rows="7" placeholder="리뷰 ..."></textarea>
         </div>
         <div class="btn-wrapper">
-            <button class="save-btn" type="button" onclick="postUserReview()">글쓰기</button>
+            <button id="write-btn" class="save-btn" type="button" onclick="postUserReview(getId())">글쓰기</button>
+        </div>
+        <div class="btn-wrapper">
+            <button id="update-btn" class="save-btn" type="button" onclick="postUserReview(getId())" style="display: none">수정하기</button>
         </div>
     </form>
 </div>

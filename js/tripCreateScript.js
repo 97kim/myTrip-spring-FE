@@ -1,5 +1,10 @@
+function getId() {
+    const URLSearch = new URLSearchParams(location.search);
+    return URLSearch.get('id');
+}
+
 // 사용자 여행 리뷰 작성
-function postUserReview() {
+function postUserReview(reviewId) {
     let title = $('#title').val();
     let place = $('#place').val();
     let review = $('#review').val();
@@ -20,17 +25,40 @@ function postUserReview() {
     userReview.append("review_data", new Blob([JSON.stringify(data)], {type: "application/json"}))
     userReview.append("review_img", review_img);
 
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/review",
-        contentType: false,
-        processData: false,
-        data: userReview,
-        success: function (response) {
-            alert("완료!");
-            window.location.href = '../templates/tripsList.html';
-        }
-    });
+    if (!reviewId) {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/review",
+            contentType: false,
+            processData: false,
+            data: userReview,
+            success: function (response) {
+                alert("완료!");
+                window.location.href = '../templates/tripsList.html';
+            }
+        });
+    } else {
+        $.ajax({
+            type: "PUT",
+            url: `http://localhost:8080/reviews/${reviewId}`,
+            contentType: false,
+            processData: false,
+            data: userReview,
+            success: function (response) {
+                alert("수정을 완료했습니다.")
+                window.location.href = `../templates/tripDetail.html?id=${reviewId}`;
+            }
+        });
+    }
+}
+
+function getItem() {
+    $('.image-upload-wrap').hide();
+    $('#img').attr('src', sessionStorage.getItem('file'));
+    $('.file-upload-content').show();
+    $("#title").val(sessionStorage.getItem("title"))
+    $("#place").val(sessionStorage.getItem("place"))
+    $("#review").val(sessionStorage.getItem("review"))
 }
 
 // 파일 업로더 js
