@@ -2,6 +2,7 @@ if (!getId()) {
     $('#write-btn').show();
     $('#update-btn').hide();
 } else {
+    getItem();
     $('#write-btn').hide();
     $('#update-btn').show();
 }
@@ -53,6 +54,15 @@ function postUserReview(reviewId) {
             }
         });
     }
+}
+
+function getItem() {
+    $('.image-upload-wrap').hide();
+    $('#img').attr('src', sessionStorage.getItem('file'));
+    $('.file-upload-content').show();
+    $("#title").val(sessionStorage.getItem("title"))
+    $("#place").val(sessionStorage.getItem("place"))
+    $("#review").val(sessionStorage.getItem("review"))
 }
 
 // 파일 업로더 js
