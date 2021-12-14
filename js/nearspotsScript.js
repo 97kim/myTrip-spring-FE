@@ -86,5 +86,5 @@ function geoInfoList(quantity) {
 }
 
 function moveNearDetail(content_id) {
-    window.location.href = `../templates/nearDetail.html?id=${content_id}`;
+    window.location.href = `../templates/nearspot.html?id=${content_id}`;
 }
