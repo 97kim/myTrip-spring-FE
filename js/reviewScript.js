@@ -76,8 +76,10 @@ function showComments() {
                                             <span style="margin-left: 5px; font-size: 15px; font-weight: 700;">${nickname}</span>
                                             <span style="margin-left: 5px; font-size: 13px;">${dateBefore}</span>
                                         </div>
-                                        <a id="${commentId}_update" href="javascript:showUpdateCommentModel(${commentId})" style="display: none;"><i class="fas fa-edit" style="color: #6E85B2;"></i></a>
-                                        <a id="${commentId}_delete" href="javascript:deleteComment(${commentId})" style="display: none;"><i class="fas fa-trash-alt" style="color: #6E85B2;"></i></a>
+                                        <div class="d-flex justify-content-between">
+                                            <a id="${commentId}_update" href="javascript:showUpdateCommentModel(${commentId})" style="display: none;"><i class="fas fa-edit" style="color: #6E85B2;"></i></a>
+                                            <a id="${commentId}_delete" href="javascript:deleteComment(${commentId})" style="display: none;"><i class="fas fa-trash-alt" style="color: #6E85B2; margin-left: 10px;"></i></a>
+                                        </div>
                                     </div>
                                     <div style="margin: 5px 0 0 5px; word-break:break-all; font-size: 14px; font-weight: 400;">${comment}</div>
                                     <div id="${commentId}CommentUpdateInputModel" class="form-post" style="display:none">
