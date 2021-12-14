@@ -39,7 +39,7 @@
     <!--외부 static 파일 불러오기-->
     <link rel="stylesheet" href="css/public.css"/>
     <link rel="stylesheet" href="css/writeStyle.css"/>
-    <script type="text/javascript" src="js/tripFormScript.js"></script>
+    <script type="text/javascript" src="js/formScript.js"></script>
     <script type="text/javascript" src="js/logoutScript.js"></script>
     <script type="text/javascript" src="js/modalProfile.js"></script>
     <script type="text/javascript" src="js/nav.js"></script>
@@ -48,6 +48,14 @@
     <script>
         $(document).ready(function () {
             navLoginCheck();
+            if (!getId()) {
+                $('#write-btn').show();
+                $('#update-btn').hide();
+            } else {
+                getItem();
+                $('#write-btn').hide();
+                $('#update-btn').show();
+            }
         });
     </script>
 </head>
@@ -115,7 +123,7 @@
                 </div>
             </div>
             <div class="file-upload-content">
-                <img class="file-upload-image" src="#" alt="your image"/>
+                <img id="img" class="file-upload-image" src="#" alt="your image"/>
                 <div class="image-title-wrap">
                     <button type="button" onclick="removeUpload()" class="remove-image">지우기 - <span
                             class="image-title">Uploaded Image</span></button>

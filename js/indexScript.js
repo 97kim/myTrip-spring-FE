@@ -236,7 +236,7 @@ function showTripReviews(type) {
 }
 
 function moveTripDetail(trip_id) {
-    window.location.href = `../review.html`;
+    window.location.href = `../review.html?id=${trip_id}`;
 }
 
 function showPopularTrips() {
@@ -407,7 +407,7 @@ function checkAddress(code) {
 
 function writeTrip() {
     if (localStorage.getItem('token')) {
-        window.location.href = "../reviewform.html";
+        window.location.href = "../form.html";
     } else {
         alert('로그인이 필요한 서비스입니다.');
         window.location.href = "../login.html";

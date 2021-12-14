@@ -1,10 +1,6 @@
-if (!getId()) {
-    $('#write-btn').show();
-    $('#update-btn').hide();
-} else {
-    getItem();
-    $('#write-btn').hide();
-    $('#update-btn').show();
+function getId() {
+    const URLSearch = new URLSearchParams(location.search);
+    return URLSearch.get('id');
 }
 
 // 사용자 여행 리뷰 작성

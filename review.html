@@ -39,7 +39,7 @@
     <!--외부 static 파일 불러오기-->
     <link rel="stylesheet" href="css/public.css"/>
     <link rel="stylesheet" href="css/detail.css"/>
-    <script type="text/javascript" src="js/tripDetailScript.js"></script>
+    <script type="text/javascript" src="js/reviewScript.js"></script>
     <script type="text/javascript" src="js/logoutScript.js"></script>
     <script type="text/javascript" src="js/modalProfile.js"></script>
     <script type="text/javascript" src="js/nav.js"></script>
@@ -120,7 +120,7 @@
                                 <img id="profile_img" src="" alt="프로필 사진"/>
                             </div>
                             <h4 id="nickname" class="me-auto">nickname</h4>
-                            <button class="btn btn-dark btn-sm m-1 " onclick="window.location.href='tripsList.html'">목록
+                            <button class="btn btn-dark btn-sm m-1 " onclick="window.location.href='reviews.html'">목록
                             </button>
                             <div id="own-check">
                                 <button class="btn btn-dark btn-sm m-1" id="update"
@@ -173,7 +173,7 @@
                         <textarea id="comment_content" style="width: 100%;" placeholder="댓글을 입력하세요"></textarea>
 
                         <footer>
-                            <a href="javascript:postUserReview(getId())" class="button alt">댓글달기</a>
+                            <a href="javascript:postComment(getId())" class="button alt">댓글달기</a>
                         </footer>
                     </section>
 

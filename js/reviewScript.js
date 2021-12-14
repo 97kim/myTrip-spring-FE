@@ -28,7 +28,7 @@ function getUserReview(reviewId) {
 }
 
 // 댓글 달기
-function postUserReview(reviewId) {
+function postComment(reviewId) {
     let UserReviewComment = $('#comment_content').val();
 
     if (UserReviewComment.replaceAll(" ", "").replaceAll("　", "") == "") {
@@ -169,7 +169,7 @@ function updateUserReview(id) {
         sessionStorage.setItem("review", $("#review").text())
         sessionStorage.setItem("file", $("#file").attr("src"))
 
-        window.location.href = `../review-update.html`;
+        window.location.href = `../form.html?id=${id}`;
     }
 }
 
