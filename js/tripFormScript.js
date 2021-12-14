@@ -1,11 +1,19 @@
+if (!getId()) {
+    $('#write-btn').show();
+    $('#update-btn').hide();
+} else {
+    $('#write-btn').hide();
+    $('#update-btn').show();
+}
+
 // 사용자 여행 리뷰 작성
-function postUserReview() {
+function postUserReview(reviewId) {
     let title = $('#title').val();
     let place = $('#place').val();
     let review = $('#review').val();
 
     if (title.replaceAll(" ", "") == "" || place.replaceAll(" ", "") == "") {
-        return alert("제목과 장소는 필수로 입력해주세요")
+        return alert("제목과 장소는 필수로 입력해주세요");
     }
 
     let data = {
@@ -20,17 +28,31 @@ function postUserReview() {
     userReview.append("review_data", new Blob([JSON.stringify(data)], {type: "application/json"}))
     userReview.append("review_img", review_img);
 
-    $.ajax({
-        type: "POST",
-        url: "https://api.kimkj.shop/review",
-        contentType: false,
-        processData: false,
-        data: userReview,
-        success: function (response) {
-            alert("완료!");
-            window.location.href = '../tripsList.html';
-        }
-    });
+    if (!reviewId) {
+        $.ajax({
+            type: "POST",
+            url: "https://api.kimkj.shop/review",
+            contentType: false,
+            processData: false,
+            data: userReview,
+            success: function (response) {
+                alert("완료!");
+                window.location.href = '../reviews.html';
+            }
+        });
+    } else {
+        $.ajax({
+            type: "PUT",
+            url: `https://api.kimkj.shop/reviews/${reviewId}`,
+            contentType: false,
+            processData: false,
+            data: userReview,
+            success: function (response) {
+                alert("수정을 완료했습니다.")
+                window.location.href = `../review.html?id=${reviewId}`;
+            }
+        });
+    }
 }
 
 // 파일 업로더 js

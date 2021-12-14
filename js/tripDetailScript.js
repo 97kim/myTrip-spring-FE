@@ -169,7 +169,7 @@ function updateUserReview(id) {
         sessionStorage.setItem("review", $("#review").text())
         sessionStorage.setItem("file", $("#file").attr("src"))
 
-        window.location.href = `../tripUpdate.html?id=${id}`;
+        window.location.href = `../review-update.html`;
     }
 }
 
@@ -182,7 +182,7 @@ function deleteUserReview(id) {
             url: `https://api.kimkj.shop/reviews/${id}`,
             data: {},
             success: function (response) {
-                window.location.href = "../tripsList.html";
+                window.location.href = "../reviews.html";
             }
         });
     }

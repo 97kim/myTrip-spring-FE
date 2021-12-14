@@ -44,12 +44,12 @@ function showListSort(type) {
 }
 
 function moveTripDetail(trip_id) {
-    window.location.href = `../tripDetail.html?id=${trip_id}`;
+    window.location.href = `../review.html`;
 }
 
 function writeTrip() {
     if (localStorage.getItem('token')) {
-        window.location.href = "../tripCreate.html";
+        window.location.href = "../reviewform.html";
     } else {
         alert('로그인이 필요한 서비스입니다.');
         window.location.href = "../login.html";

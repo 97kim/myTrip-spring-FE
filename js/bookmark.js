@@ -123,7 +123,7 @@ function showPopularBookmarks() {
 }
 
 function movePopularDetail(content_id) {
-    window.location.href = `../popularDetail.html?id=${content_id}`;
+    window.location.href = `../theme.html`;
 }
 
 function showNearBookmarks() {
@@ -164,5 +164,5 @@ function showNearBookmarks() {
 }
 
 function moveNearDetail(content_id) {
-    window.location.href = `../nearDetail.html?id=${content_id}`;
+    window.location.href = `../nearspot.html`;
 }

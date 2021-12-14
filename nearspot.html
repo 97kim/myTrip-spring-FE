@@ -7,6 +7,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!--https 사이트에서 http 사이트 요청 시 발생하는 보안 문제 해결-->
+    <!--우리 사이트는 https이고 한국관광공사api에서 받은 이미지 주소는 http라서 발생하는 문제 해결-->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
     <!--메타태그 설정-->
     <meta property="og:title" content="여행어때"/>
     <meta property="og:description" content="위치 기반 서비스로 근처의 여행지를 확인해보세요!"/>
@@ -34,25 +38,44 @@
 
     <!--fontawesome cdn-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+          crossorigin="anonymous">
+
+
+    <!-- Bulma CSS -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"> -->
 
     <!--외부 static 파일 불러오기-->
+    <link rel="stylesheet" href="css/detail.css"/>
     <link rel="stylesheet" href="css/public.css"/>
-    <link rel="stylesheet" href="css/writeStyle.css"/>
-    <script type="text/javascript" src="js/tripCreateScript.js"></script>
+    <link rel="stylesheet" href="css/weather.css"/>
+    <script type="text/javascript" src="js/nearDetailScript.js"></script>
     <script type="text/javascript" src="js/logoutScript.js"></script>
     <script type="text/javascript" src="js/modalProfile.js"></script>
     <script type="text/javascript" src="js/nav.js"></script>
+    <script type="text/javascript"
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=00r1clbpdg"></script>
     <script type="text/javascript" src="js/ajaxPreFilter.js"></script>
+
+    <style>
+        #map {
+            width: 100%;
+            height: 300px;
+        }
+    </style>
 
     <script>
         $(document).ready(function () {
             navLoginCheck();
+            getDetailIntro();
+            getMap();
+            weather();
+            getBookmark();
         });
     </script>
 </head>
 
-<body>
+<body style="background-color: #fef8f8;">
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.html" style="color: #073A96">여행어때</a>
@@ -63,13 +86,13 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="popularList.html">Popular</a>
+                    <a class="nav-link" href="themes.html">Popular</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="nearList.html">Near</a>
+                    <a class="nav-link" href="nearspots.html">Near</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="tripsList.html">Trips</a>
+                    <a class="nav-link" href="reviews.html">Trips</a>
                 </li>
             </ul>
             <ul class="navbar-nav" id="login-btn" style="display: none;">
@@ -98,43 +121,86 @@
     </div>
 </nav>
 
-<div class="wrap">
-    <div class="writeTitle">
-        <h6>여행 등록</h6>
-    </div>
-    <form enctype="multipart/form-data">
-        <div class="file-upload mb-3">
-            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">
-                사진 선택
-            </button>
-            <div class="image-upload-wrap">
-                <input class="file-upload-input" id="file" type="file" onchange="readURL(this);"
-                       accept="image/*"/>
-                <div class="drag-text">
-                    <h6>드래그 해서 올리거나 사진을 선택하세요!</h6>
+<div id="page-wrapper">
+    <section id="main">
+        <div class="custom-container">
+            <div class="row">
+                <div class="col-8 col-12-medium">
+
+                    <!-- Content -->
+                    <article class="box post">
+                        <a href="#" class="image featured"><img id="file" alt=""/></a>
+                        <header>
+                            <h2 id="title"></h2>
+                            <p id="address"></p>
+                        </header>
+                        <section>
+                            <header>
+                                <p id="overview"></p>
+                                <p id="homepage" style="word-break:break-all;"></p>
+                            </header>
+                            <div>
+                                <button type="button" class="level-item is-sparta" aria-label="heart"
+                                        onclick="toggle_bookmark(getId())">
+                                        <span class="icon is-small"><i id="bookmark" class="far fa-heart"
+                                                                       aria-hidden="true"></i></span>
+                                    &nbsp;<span>즐겨찾기</span>
+                                </button>
+                            </div>
+                        </section>
+                    </article>
+
+                </div>
+                <div class="col-4 col-12-medium">
+
+                    <!-- Sidebar -->
+                    <section class="box">
+                        <header>
+                            <h3>지도</h3>
+                        </header>
+                        <div id="map"></div>
+                    </section>
+                    <section class="box">
+                        <header>
+                            <h3>날씨</h3>
+                        </header>
+                        <div id="weather_wrapper">
+                            <div class="weatherCard row">
+                                <div class="currentTemp col">
+                                    <span id="temp" class="temp"></span>
+                                    <span id="location" class="location">
+                                        <!-- 로딩 css -->
+                                        <div class="pswp__preloader__icn">
+                                            <div class="pswp__preloader__cut">
+                                                <div class="pswp__preloader__donut"></div>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="currentWeather">
+                                    <div class="part1">
+                                        <img id="icon" class="conditions">
+                                        <span id="weather" class="weather"></span>
+                                    </div>
+                                    <div class="part2">
+                                        <div class="rain">
+                                            <i class="fas fa-tint"></i>
+                                            <div id="rain">-</div>
+                                        </div>
+                                        <div class="wind">
+                                            <i class="fas fa-wind"></i>
+                                            <div id="wind"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                 </div>
             </div>
-            <div class="file-upload-content">
-                <img class="file-upload-image" src="#" alt="your image"/>
-                <div class="image-title-wrap">
-                    <button type="button" onclick="removeUpload()" class="remove-image">지우기 - <span
-                            class="image-title">Uploaded Image</span></button>
-                </div>
-            </div>
         </div>
-        <div class="input-text mb-3">
-            <input type="text" class="title" id="title" placeholder="제목 ...">
-        </div>
-        <div class="input-text mb-3">
-            <input type="text" class="place" id="place" placeholder="장소 ...">
-        </div>
-        <div class="input-textarea mb-3">
-            <textarea class="review" id="review" rows="7" placeholder="리뷰 ..."></textarea>
-        </div>
-        <div class="btn-wrapper">
-            <button class="save-btn" type="button" onclick="postUserReview()">글쓰기</button>
-        </div>
-    </form>
+    </section>
 </div>
 
 <!-- 모달 창 -->
@@ -167,7 +233,7 @@
 
 <!-- Site footer -->
 <footer class="site-footer">
-    <div class="container">
+    <div class="custom-container">
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <h6>About</h6>
@@ -215,7 +281,7 @@
         </div>
         <hr>
     </div>
-    <div class="container">
+    <div class="custom-container">
         <div class="row">
             <div class="col-md-8 col-sm-6 col-xs-12">
                 <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by

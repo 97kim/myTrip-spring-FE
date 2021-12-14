@@ -7,6 +7,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!--https 사이트에서 http 사이트 요청 시 발생하는 보안 문제 해결-->
+    <!--우리 사이트는 https이고 한국관광공사api에서 받은 이미지 주소는 http라서 발생하는 문제 해결-->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
     <!--메타태그 설정-->
     <meta property="og:title" content="여행어때"/>
     <meta property="og:description" content="위치 기반 서비스로 근처의 여행지를 확인해보세요!"/>
@@ -14,6 +18,10 @@
 
     <!--파비콘(주소창 아이콘) 적용-->
     <link rel="shortcut icon" href="img/favicon.ico"/>
+
+    <!--fontawesome cdn-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
     <!--bootstrap cdn-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -34,28 +42,37 @@
 
     <!--fontawesome cdn-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+          crossorigin="anonymous">
 
     <!--외부 static 파일 불러오기-->
     <link rel="stylesheet" href="css/public.css"/>
     <link rel="stylesheet" href="css/detail.css"/>
-    <script type="text/javascript" src="js/tripDetailScript.js"></script>
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="css/weather.css"/>
+
+    <script type="text/javascript" src="js/popularDetailScript.js"></script>
     <script type="text/javascript" src="js/logoutScript.js"></script>
     <script type="text/javascript" src="js/modalProfile.js"></script>
     <script type="text/javascript" src="js/nav.js"></script>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script type="text/javascript"
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=00r1clbpdg"></script>
     <script type="text/javascript" src="js/ajaxPreFilter.js"></script>
-    <script>
-        Kakao.init('a06f77fa2f554f8e1f314819fccabefd');
-    </script>
+
+    <style>
+        #map {
+            width: 100%;
+            height: 300px;
+        }
+    </style>
 
     <script>
         $(document).ready(function () {
-            getUserReview(getId()); // 사용자 리뷰(제목, 장소, 사진, 내용), 날짜 출력
-            get_like(getId());
-            showComments(getId()); // 댓글 리스트 출력
-            autoHeight(); // textarea 자동 높이 조절
             navLoginCheck();
+            getDetailIntro();
+            getMap_popular();
+            weather_popular();
+            getBookmark_popular();
         });
     </script>
 </head>
@@ -71,13 +88,13 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="popularList.html">Popular</a>
+                    <a class="nav-link" href="themes.html">Popular</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="nearList.html">Near</a>
+                    <a class="nav-link" href="nearspots.html">Near</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="tripsList.html">Trips</a>
+                    <a class="nav-link" href="reviews.html">Trips</a>
                 </li>
             </ul>
             <ul class="navbar-nav" id="login-btn" style="display: none;">
@@ -115,50 +132,23 @@
                     <!-- Content -->
                     <article class="box post">
                         <a href="#" class="image featured"><img id="file" alt=""/></a>
-                        <header class="d-flex align-items-center mb-4">
-                            <div class="card__thumb">
-                                <img id="profile_img" src="" alt="프로필 사진"/>
-                            </div>
-                            <h4 id="nickname" class="me-auto">nickname</h4>
-                            <button class="btn btn-dark btn-sm m-1 " onclick="window.location.href='tripsList.html'">목록
-                            </button>
-                            <div id="own-check">
-                                <button class="btn btn-dark btn-sm m-1" id="update"
-                                        onclick="updateUserReview(getId());">수정
-                                </button>
-                                <button class="btn btn-dark btn-sm m-1" onclick="deleteUserReview(getId())">삭제
-                                </button>
-                            </div>
+                        <header>
+                            <h2 id="title"></h2>
                         </header>
-                        <h2 id="title" style="margin: 40px 0 20px 0;"></h2>
-                        <p id="date"></p>
-                        <h3>장소</h3>
-                        <p id="place"></p>
                         <section>
-                            <h3>내용</h3>
-                            <p id="review"></p>
-                        </section>
-
-                        <div class="d-flex justify-content-between">
-                            <div class="like-box" onclick="userReviewLike(getId())">
-                                <button type="button" class="level-item is-like" aria-label="like">
-                                        <span class="icon is-small"><i id="like" class="far fa-thumbs-up"
+                            <header>
+                                <p id="overview"></p>
+                                <p id="homepage" style="word-break:break-all;"></p>
+                            </header>
+                            <div>
+                                <button type="button" class="level-item is-sparta" aria-label="heart"
+                                        onclick="toggle_bookmark_popular(getId_popular())">
+                                        <span class="icon is-small"><i id="bookmark" class="far fa-heart"
                                                                        aria-hidden="true"></i></span>
-                                    &nbsp;<span>좋아요</span>
+                                    &nbsp;<span>즐겨찾기</span>
                                 </button>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between">
-                                <button type="button" onclick="kakaoShare()" class="d-flex align-self-center"
-                                        style="text-decoration-line: none;">
-                                    <img class="d-flex align-self-center"
-                                         src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
-                                         width="20px" height="20px"/>
-                                    <span class="d-flex align-self-center"
-                                          style="margin-left: 10px; color: black;">공유</span>
-                                </button>
-                            </div>
-                        </div>
-
+                        </section>
                     </article>
 
                 </div>
@@ -167,14 +157,45 @@
                     <!-- Sidebar -->
                     <section class="box">
                         <header>
-                            <h3>댓글</h3>
+                            <h3>지도</h3>
                         </header>
-                        <div id="comment_list"></div>
-                        <textarea id="comment_content" style="width: 100%;" placeholder="댓글을 입력하세요"></textarea>
-
-                        <footer>
-                            <a href="javascript:postUserReview(getId())" class="button alt">댓글달기</a>
-                        </footer>
+                        <div id="map"></div>
+                    </section>
+                    <section class="box">
+                        <header>
+                            <h3>날씨</h3>
+                        </header>
+                        <div id="weather_wrapper">
+                            <div class="weatherCard row">
+                                <div class="currentTemp col">
+                                    <span id="temp" class="temp"></span>
+                                    <span id="location" class="location">
+                                        <!-- 로딩 css -->
+                                        <div class="pswp__preloader__icn">
+                                            <div class="pswp__preloader__cut">
+                                                <div class="pswp__preloader__donut"></div>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="currentWeather">
+                                    <div class="part1">
+                                        <img id="icon" class="conditions">
+                                        <span id="weather" class="weather"></span>
+                                    </div>
+                                    <div class="part2">
+                                        <div class="rain">
+                                            <i class="fas fa-tint"></i>
+                                            <div id="rain">-</div>
+                                        </div>
+                                        <div class="wind">
+                                            <i class="fas fa-wind"></i>
+                                            <div id="wind"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>
 
                 </div>
@@ -182,7 +203,6 @@
         </div>
     </section>
 </div>
-
 
 <!-- 모달 창 -->
 <div class="modal fade" id="profile_modal" tabindex="-1" aria-labelledby="profile_modal_label" aria-hidden="true">

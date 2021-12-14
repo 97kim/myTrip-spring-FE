@@ -44,20 +44,20 @@
     <link rel="stylesheet" href="css/public.css"/>
     <link rel="stylesheet" href="css/listStyle.css"/>
     <link rel="stylesheet" href="css/loading.css"/>
-    <script type="text/javascript" src="js/nearListScript.js"></script>
+    <script type="text/javascript" src="js/popularListScript.js"></script>
     <script type="text/javascript" src="js/logoutScript.js"></script>
     <script type="text/javascript" src="js/modalProfile.js"></script>
     <script type="text/javascript" src="js/nav.js"></script>
     <script type="text/javascript" src="js/ajaxPreFilter.js"></script>
 
     <script>
-        let perPage2 = "15";
+        let perPage = "15";
 
         $(document).ready(function () {
-            geoInfoList(perPage2);
-            $("#perPagingSelect2").change(function () {
-                perPage2 = $(this).val();
-                geoInfoList(perPage2)
+            popularList(perPage);
+            $("#perPagingSelect").change(function () {
+                perPage = $(this).val();
+                popularList(perPage)
             })
             navLoginCheck();
         });
@@ -74,17 +74,19 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="popularList.html">Popular</a>
+                    <a class="nav-link" href="themes.html">Popular</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="nearList.html">Near</a>
+                    <a class="nav-link" href="nearspots.html">Near</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="tripsList.html">Trips</a>
+                    <a class="nav-link" href="reviews.html">Trips</a>
                 </li>
             </ul>
+
             <ul class="navbar-nav" id="login-btn" style="display: none;">
                 <li class="nav-item">
                     <a class="nav-link" href="login.html">
@@ -110,25 +112,27 @@
         </div>
     </div>
 </nav>
-
 <div class="sort">
     <div>
-        <a id="trip" href="javascript:checkType(12, perPage2)" style="text-decoration: none;">여행지</a>
+        <a id="family" href="javascript:checkTheme(1, perPage)" style="text-decoration: none;">가족 여행</a>
         <span> &nbsp; | &nbsp;</span>
-        <a id="food" href="javascript:checkType(39, perPage2)" style="text-decoration: none;">음식점</a>
+        <a id="alone" href="javascript:checkTheme(2, perPage)" style="text-decoration: none;">나홀로 여행</a>
         <span> &nbsp; | &nbsp;</span>
-        <a id="accommodation" href="javascript:checkType(32, perPage2)" style="text-decoration: none;">숙박</a>
+        <a id="healing" href="javascript:checkTheme(3, perPage)" style="text-decoration: none;">힐링 여행</a>
         <span> &nbsp; | &nbsp;</span>
-        <a id="festival" href="javascript:checkType(15, perPage2)" style="text-decoration: none;">축제공연행사</a>
+        <a id="walking" href="javascript:checkTheme(4, perPage)" style="text-decoration: none;">걷기 좋은 여행</a>
+        <span> &nbsp; | &nbsp;</span>
+        <a id="camping" href="javascript:checkTheme(5, perPage)" style="text-decoration: none;">캠핑 여행</a>
+        <span> &nbsp; | &nbsp;</span>
+        <a id="famous_restaurant" href="javascript:checkTheme(6, perPage)" style="text-decoration: none;">맛집 여행</a>
     </div>
-    <select style="width: 70px; margin: 5px 0;" id="perPagingSelect2">
+    <select style="width: 70px; margin: 5px 0;" id="perPagingSelect">
         <option value="15">15</option>
         <option value="20">20</option>
         <option value="25">25</option>
         <option value="30">30</option>
     </select>
 </div>
-
 
 <div class="before-render" style="width: 100%; height: 100vh;">
     <div id="container-box">
@@ -139,7 +143,7 @@
     </div>
 </div>
 
-<ul id="near_card" class="cards">
+<ul id="popular_card" class="cards">
 </ul>
 
 <!-- 모달 창 -->
