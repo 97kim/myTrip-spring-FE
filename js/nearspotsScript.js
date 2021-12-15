@@ -29,7 +29,7 @@ function geoInfoList(quantity) {
 
         $.ajax({
                 type: "POST",
-                url: "https://api.kimkj.shop/nearspots",
+                url: "https://api.mytrips.shop/nearspots",
                 contentType: "application/json",
                 data: JSON.stringify({
                     quantity_give: quantity,

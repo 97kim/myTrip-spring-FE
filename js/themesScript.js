@@ -43,7 +43,7 @@ function popularList(quantity) {
 
     $.ajax({
             type: "POST",
-            url: "https://api.kimkj.shop/themes",
+            url: "https://api.mytrips.shop/themes",
             contentType: "application/json",
             data: JSON.stringify({
                 quantity: quantity,

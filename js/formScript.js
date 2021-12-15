@@ -28,7 +28,7 @@ function postUserReview(reviewId) {
     if (!reviewId) {
         $.ajax({
             type: "POST",
-            url: "https://api.kimkj.shop/review",
+            url: "https://api.mytrips.shop/review",
             contentType: false,
             processData: false,
             data: userReview,
@@ -40,7 +40,7 @@ function postUserReview(reviewId) {
     } else {
         $.ajax({
             type: "PUT",
-            url: `https://api.kimkj.shop/reviews/${reviewId}`,
+            url: `https://api.mytrips.shop/reviews/${reviewId}`,
             contentType: false,
             processData: false,
             data: userReview,

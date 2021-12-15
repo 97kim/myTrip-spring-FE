@@ -19,7 +19,7 @@ function sign_in() {
     }
     $.ajax({
         type: "POST",
-        url: "https://api.kimkj.shop/login",
+        url: "https://api.mytrips.shop/login",
         contentType: "application/json",
         data: JSON.stringify({
             loginCheck: "login",
@@ -76,7 +76,7 @@ function sign_up() {
     }
     $.ajax({
         type: "POST",
-        url: "https://api.kimkj.shop/login",
+        url: "https://api.mytrips.shop/login",
         contentType: "application/json",
         data: JSON.stringify({
             loginCheck: "signup",
@@ -125,7 +125,7 @@ function check_dup() {
     $("#help-id").addClass("is-loading")
     $.ajax({
         type: "POST",
-        url: "https://api.kimkj.shop/signup/check",
+        url: "https://api.mytrips.shop/signup/check",
         contentType: "application/json",
         data: JSON.stringify({
             username: username

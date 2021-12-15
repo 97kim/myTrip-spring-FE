@@ -6,7 +6,7 @@ function getId() {
 function getUserReview(reviewId) {
     $.ajax({
         type: "GET",
-        url: `https://api.kimkj.shop/reviews/${reviewId}`,
+        url: `https://api.mytrips.shop/reviews/${reviewId}`,
         success: function (response) {
             $('#title').text(response['title']);
             $('#place').text(response['place']);
@@ -37,7 +37,7 @@ function postComment(reviewId) {
 
     $.ajax({
         type: "POST",
-        url: `https://api.kimkj.shop/reviews/${reviewId}/comment`,
+        url: `https://api.mytrips.shop/reviews/${reviewId}/comment`,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({comment: UserReviewComment}),
         statusCode: {
@@ -58,7 +58,7 @@ function showComments() {
     $('#comment_list').empty();
     $.ajax({
         type: "GET",
-        url: `https://api.kimkj.shop/reviews/${getId()}/comments`,
+        url: `https://api.mytrips.shop/reviews/${getId()}/comments`,
         data: {},
         success: function (response) {
             for (let i = 0; i < response.length; i++) {
@@ -109,7 +109,7 @@ function deleteComment(comment_id) {
     if (confirm("삭제하시겠습니까?") === true) {
         $.ajax({
             type: "DELETE",
-            url: `https://api.kimkj.shop/reviews/${getId()}/comments/${comment_id}`,
+            url: `https://api.mytrips.shop/reviews/${getId()}/comments/${comment_id}`,
             data: {},
             success: function (response) {
                 showComments();
@@ -141,7 +141,7 @@ function updateComment(commentId) {
     }
     $.ajax({
         type: "PUT",
-        url: `https://api.kimkj.shop/reviews/${getId()}/comments/${commentId}`,
+        url: `https://api.mytrips.shop/reviews/${getId()}/comments/${commentId}`,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(UserReviewComment),
         statusCode: {
@@ -181,7 +181,7 @@ function deleteUserReview(id) {
     if (confirm("삭제 하시겠습니까?") === true) {
         $.ajax({
             type: "DELETE",
-            url: `https://api.kimkj.shop/reviews/${id}`,
+            url: `https://api.mytrips.shop/reviews/${id}`,
             data: {},
             success: function (response) {
                 window.location.href = "../reviews.html";
@@ -203,7 +203,7 @@ function userReviewLike(trip_id) {
 
             $.ajax({
                 type: "POST",
-                url: `https://api.kimkj.shop/reviews/${trip_id}/like`,
+                url: `https://api.mytrips.shop/reviews/${trip_id}/like`,
                 data: {},
                 success: function (response) {
                     getUserReview(getId())
@@ -213,7 +213,7 @@ function userReviewLike(trip_id) {
         } else {
             $.ajax({
                 type: "DELETE",
-                url: `https://api.kimkj.shop/reviews/${trip_id}/like`,
+                url: `https://api.mytrips.shop/reviews/${trip_id}/like`,
                 data: {},
                 success: function (response) {
                     getUserReview(getId())
@@ -227,7 +227,7 @@ function userReviewLike(trip_id) {
 function get_like(id) {
     $.ajax({
         type: "GET",
-        url: `https://api.kimkj.shop/reviews/${id}/like`,
+        url: `https://api.mytrips.shop/reviews/${id}/like`,
         data: {},
         success: function (response) {
             if (response['likeStatus'] == true) {
@@ -244,7 +244,7 @@ function get_like(id) {
 function kakaoShare() {
     $.ajax({
         type: "GET",
-        url: `https://api.kimkj.shop/reviews/${getId()}`,
+        url: `https://api.mytrips.shop/reviews/${getId()}`,
         data: {},
         success: function (response) {
             let share_title = response['title'];
