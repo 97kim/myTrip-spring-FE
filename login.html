@@ -33,6 +33,21 @@
     <!--외부 static 파일 불러오기-->
     <link rel="stylesheet" href="../css/indexStyle.css"/>
     <script type="text/javascript" src="../js/loginScript.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#input-password').on('keypress', function (e) {
+                if (e.keyCode == '13') {
+                    sign_in();
+                }
+            });
+
+            $('#input-password2').on('keypress', function (e) {
+                if (e.keyCode == '13') {
+                    sign_up();
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
