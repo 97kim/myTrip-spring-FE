@@ -39,16 +39,22 @@ function postUserReview(reviewId) {
         });
     } else {
         $.ajax({
-            type: "PUT",
-            url: `http://localhost:8080/reviews/${reviewId}`,
-            contentType: false,
-            processData: false,
-            data: userReview,
-            success: function (response) {
-                alert("수정을 완료했습니다.")
-                window.location.href = `../templates/review.html?id=${reviewId}`;
+                type: "PUT",
+                url: `http://localhost:8080/reviews/${reviewId}`,
+                contentType: false,
+                processData: false,
+                data: userReview,
+                success: function (response) {
+                    console.log(response)
+                    if (response === null) {
+                        alert("이 게시물의 수정 권한이 없습니다.")
+                    } else {
+                    }
+                    alert("수정을 완료했습니다.")
+                    window.location.href = `../templates/review.html?id=${reviewId}`;
+                }
             }
-        });
+        );
     }
 }
 
