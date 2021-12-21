@@ -123,8 +123,7 @@
                             <button class="btn btn-dark btn-sm m-1 " onclick="window.location.href='reviews.html'">목록
                             </button>
                             <div id="own-check">
-                                <button class="btn btn-dark btn-sm m-1" id="update"
-                                        onclick="updateUserReview(getId());">수정
+                                <button class="btn btn-dark btn-sm m-1" onclick="updateUserReview(getId());">수정
                                 </button>
                                 <button class="btn btn-dark btn-sm m-1" onclick="deleteUserReview(getId())">삭제
                                 </button>
@@ -183,7 +182,6 @@
     </section>
 </div>
 
-
 <!-- 모달 창 -->
 <div class="modal fade" id="profile_modal" tabindex="-1" aria-labelledby="profile_modal_label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -201,6 +199,11 @@
                     <div class="mb-3">
                         <label for="modal_img" class="col-form-label">프로필 사진:</label>
                         <input type="file" class="form-control" id="modal_img">
+                    </div>
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="deleteUser()">회원
+                            탈퇴하기
+                        </button>
                     </div>
                 </form>
             </div>

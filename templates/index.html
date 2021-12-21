@@ -6,6 +6,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--  사파리 사용 가능  -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <!--메타태그 설정-->
     <meta property="og:title" content="여행어때"/>
@@ -187,6 +189,11 @@
                     <div class="mb-3">
                         <label for="modal_img" class="col-form-label">프로필 사진:</label>
                         <input type="file" class="form-control" id="modal_img">
+                    </div>
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="deleteUser()">회원
+                            탈퇴하기
+                        </button>
                     </div>
                 </form>
             </div>
