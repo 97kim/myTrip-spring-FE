@@ -9,7 +9,7 @@ function saveProfile() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/profile",
+        url: "http://localhost:8080/user",
         data: form_data,
         contentType: false,
         processData: false,
