@@ -8,5 +8,5 @@
 <hr>
 
 AWS Route 53에서 서브 도메인 추가 <br>
-api.kimkj.shop -> ec2 인스턴스 (BE) <br>
-www.kimkj.shop -> Cloudfront 배포 도메인 (FE)
+api.mytrips.shop -> ec2 인스턴스 (BE) <br>
+www.mytrips.shop -> Cloudfront 배포 도메인 (FE)
