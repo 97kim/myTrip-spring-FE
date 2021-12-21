@@ -9,7 +9,7 @@ function saveProfile() {
 
     $.ajax({
         type: "POST",
-        url: "https://api.mytrips.shop/profile",
+        url: "https://api.mytrips.shop/user",
         data: form_data,
         contentType: false,
         processData: false,
