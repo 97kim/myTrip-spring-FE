@@ -202,7 +202,7 @@ function showTripReviews(type) {
                 let userReviewPlace = response[i]['place'];
                 let userReviewFile = response[i]['reviewImgUrl'];
                 let userReviewDate = response[i]['createdAt'];
-                let userReviewLikes = response[i]['likeCnt'];
+                let userReviewLikes = response[i]['userReviewLikes'].length;
                 let userReviewProfile_img = response[i]['user']['profileImgUrl'];
                 let userReviewNickname = response[i]['user']['nickname'];
 

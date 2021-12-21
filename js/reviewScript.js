@@ -15,7 +15,7 @@ function getUserReview(reviewId) {
             $('#profile_img').attr('src', response['user']['profileImgUrl']);
             $('#file').attr('src', response['reviewImgUrl']);
             $('#date').text(response['createdAt']);
-            $('#like').text(response['likeCnt']);
+            $('#like').text(response['userReviewLikes'].length);
 
             // 자신이 작성한 리뷰에만 수정/삭제 버튼 뜨게 한다
             if (response['user']['username'] == localStorage.getItem('username')) {
