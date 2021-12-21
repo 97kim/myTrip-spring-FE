@@ -115,8 +115,7 @@ function deleteComment(comment_id) {
                 showComments();
             }
         });
-    }
-    ;
+    };
 }
 
 
