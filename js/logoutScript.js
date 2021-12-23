@@ -1,3 +1,14 @@
+$(document).ready(function () {
+    $(document).ajaxError(function (e, xhr, settings) {
+        if (xhr.status === 401 && localStorage.getItem("token")) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('username');
+            alert('장시간동안 접속하지 않아 로그아웃 되었습니다.');
+            window.location.href = '../templates/login.html';
+        }
+    });
+});
+
 function logoutScript() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
