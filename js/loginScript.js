@@ -19,10 +19,9 @@ function sign_in() {
     }
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/login",
+        url: "http://localhost:8080/user/login",
         contentType: "application/json",
         data: JSON.stringify({
-            loginCheck: "login",
             username: username,
             password: password,
         }),
@@ -74,17 +73,17 @@ function sign_up() {
     } else {
         $("#help-password2").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
     }
+
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/login",
+        url: "http://localhost:8080/user/signup",
         contentType: "application/json",
         data: JSON.stringify({
-            loginCheck: "signup",
             username: username,
             password: password,
         }),
         success: function (response) {
-            alert("회원가입을 축하드립니다!");
+            alert(response);
             window.location.href = "../templates/login.html";
         }
     });
@@ -125,7 +124,7 @@ function check_dup() {
     $("#help-id").addClass("is-loading")
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/signup/check",
+        url: "http://localhost:8080/user/signup/check",
         contentType: "application/json",
         data: JSON.stringify({
             username: username
