@@ -76,7 +76,7 @@ function sign_up() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/user/create",
+        url: "http://localhost:8080/user/signup",
         contentType: "application/json",
         data: JSON.stringify({
             username: username,
