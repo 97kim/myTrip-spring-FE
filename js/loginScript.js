@@ -22,7 +22,6 @@ function sign_in() {
         url: "http://localhost:8080/login",
         contentType: "application/json",
         data: JSON.stringify({
-            loginCheck: "login",
             username: username,
             password: password,
         }),
@@ -74,17 +73,17 @@ function sign_up() {
     } else {
         $("#help-password2").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
     }
+
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/login",
+        url: "http://localhost:8080/create/user",
         contentType: "application/json",
         data: JSON.stringify({
-            loginCheck: "signup",
             username: username,
             password: password,
         }),
         success: function (response) {
-            alert("회원가입을 축하드립니다!");
+            alert(response);
             window.location.href = "../templates/login.html";
         }
     });
