@@ -19,10 +19,9 @@ function sign_in() {
     }
     $.ajax({
         type: "POST",
-        url: "https://api.mytrips.shop/login",
+        url: "https://api.mytrips.shop/user/login",
         contentType: "application/json",
         data: JSON.stringify({
-            loginCheck: "login",
             username: username,
             password: password
         }),
@@ -76,15 +75,14 @@ function sign_up() {
     }
     $.ajax({
         type: "POST",
-        url: "https://api.mytrips.shop/login",
+        url: "https://api.mytrips.shop/user/signup",
         contentType: "application/json",
         data: JSON.stringify({
-            loginCheck: "signup",
             username: username,
             password: password
         }),
         success: function (response) {
-            alert("회원가입을 축하드립니다!");
+            alert(response);
             window.location.href = "../login.html";
         }
     });
@@ -125,7 +123,7 @@ function check_dup() {
     $("#help-id").addClass("is-loading")
     $.ajax({
         type: "POST",
-        url: "https://api.mytrips.shop/signup/check",
+        url: "https://api.mytrips.shop/user/signup/check",
         contentType: "application/json",
         data: JSON.stringify({
             username: username
