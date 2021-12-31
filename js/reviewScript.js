@@ -8,9 +8,9 @@ function getUserReview(reviewId) {
         type: "GET",
         url: `https://api.mytrips.shop/reviews/${reviewId}`,
         success: function (response) {
-            $('#title').text(response['title']);
-            $('#place').text(response['place']);
-            $('#review').text(response['review']);
+            $('#title').html(response['title']);
+            $('#place').html(response['place']);
+            $('#review').html(response['review']);
             $('#nickname').text(response['user']['nickname']);
             $('#profile_img').attr('src', response['user']['profileImgUrl']);
             $('#file').attr('src', response['reviewImgUrl']);
